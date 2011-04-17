@@ -1,6 +1,10 @@
 #!perl -w
 
 BEGIN {
+    unless (-f "t/LIVE_TESTS" || -f "LIVE_TESTS") {
+	print "1..0 # SKIP Live tests disabled; pass --live-tests to Makefile.PL to enable\n";
+	exit;
+    }
     eval {
         require IO::Socket::INET;
 	my $s = IO::Socket::INET->new(
@@ -18,7 +22,7 @@ BEGIN {
 
 use strict;
 use Test;
-plan tests => 6;
+plan tests => 8;
 
 use Net::HTTP;
 
@@ -36,14 +40,12 @@ for (1..2) {
 		      Accept => '*/*');
 
     my($code, $mess, %h) = $s->read_response_headers;
+    print "# ----------------------------\n";
     print "# $code $mess\n";
     for (sort keys %h) {
 	print "# $_: $h{$_}\n";
     }
-    print "\n";
-
-    ok($code, "200");
-    ok($h{'Content-Type'}, "message/http");
+    print "#\n";
 
     my $buf;
     while (1) {
@@ -53,14 +55,13 @@ for (1..2) {
 	$buf .= $tmp;
     }
     $buf =~ s/\r//g;
+    (my $out = $buf) =~ s/^/# /gm;
+    print $out;
 
-    ok($buf, <<EOT);
-TRACE /libwww-perl HTTP/1.1
-Host: www.apache.org
-User-Agent: Mozilla/5.0
-Accept-Language: no,en
-Accept: */*
+    ok($code, "200");
+    ok($h{'Content-Type'}, "message/http");
 
-EOT
+    ok($buf, qr/^TRACE \/libwww-perl HTTP\/1/);
+    ok($buf, qr/^User-Agent: Mozilla\/5.0$/m);
 }
 
