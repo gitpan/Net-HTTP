@@ -8,4 +8,5 @@ MANIFEST			This list of files
 README
 t/http.t
 t/apache.t
+t/apache-https.t
 META.yml                                 Module meta-data (added by MakeMaker)
