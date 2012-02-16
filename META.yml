@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               Net-HTTP
-version:            6.02
+version:            6.03
 abstract:           Low-level HTTP connection (client)
 author:
     - Gisle Aas <gisle@activestate.com>
@@ -15,10 +15,10 @@ requires:
     IO::Compress::Gzip:   0
     IO::Select:           0
     IO::Socket::INET:     0
-    perl:                 5.008008
+    perl:                 5.006002
 resources:
     MailingList:  mailto:libwww@perl.org
-    repository:   http://github.com/gisle/libwww-perl/tree/Net-HTTP/master
+    repository:   http://github.com/gisle/net-http
 no_index:
     directory:
         - t
