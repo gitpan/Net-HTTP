@@ -3,10 +3,14 @@ package Net::HTTP::NB;
 use strict;
 use vars qw($VERSION @ISA);
 
-$VERSION = "6.00";
+$VERSION = "6.04";
 
 require Net::HTTP;
 @ISA=qw(Net::HTTP);
+
+sub can_read {
+    return 1;
+}
 
 sub sysread {
     my $self = $_[0];
