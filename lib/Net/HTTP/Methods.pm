@@ -5,7 +5,7 @@ require 5.005;  # 4-arg substr
 use strict;
 use vars qw($VERSION);
 
-$VERSION = "6.05";
+$VERSION = "6.06";
 
 my $CRLF = "\015\012";   # "\r\n" is not portable
 
@@ -283,6 +283,7 @@ sub my_readline {
 sub can_read {
     my $self = shift;
     return 1 unless defined(fileno($self));
+    return 1 if $self->isa('IO::Socket::SSL') && $self->pending;
 
     # With no timeout, wait forever.  An explict timeout of 0 can be
     # used to just check if the socket is readable without waiting.
