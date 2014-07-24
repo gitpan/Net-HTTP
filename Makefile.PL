@@ -26,13 +26,14 @@ WriteMakefile(
 	'IO::Select' => 0,
         'Compress::Raw::Zlib' => 0,
         'IO::Compress::Gzip' => 0,
+        'URI' => 0,
     },
     META_MERGE => {
         recommends => {
             'IO::Socket::SSL' => "1.38",
         },
 	resources => {
-            repository => 'http://github.com/gisle/net-http',
+            repository => 'http://github.com/libwww-perl/net-http',
 	    MailingList => 'mailto:libwww@perl.org',
         }
     },

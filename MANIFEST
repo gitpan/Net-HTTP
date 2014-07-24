@@ -10,4 +10,5 @@ t/http.t
 t/http-nb.t
 t/apache.t
 t/apache-https.t
-META.yml                                 Module meta-data (added by MakeMaker)
+META.yml                                 Module YAML meta-data (added by MakeMaker)
+META.json                                Module JSON meta-data (added by MakeMaker)
